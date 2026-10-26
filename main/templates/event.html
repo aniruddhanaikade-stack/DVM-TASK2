@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>{{ event.name }}</h2>
+<p>{{ event.get_kind_display }} | {{ event.place }} | Rs {{ event.price }} each</p>
+
+<h3>{% if event.kind == "slot" %}Available slots{% else %}Available shows{% endif %}</h3>
+{% for s in slots %}
+    <div class="box">
+        {{ s.start|date:"d M Y, h:i A" }} ({{ s.duration }} min) -
+        {{ s.left }} of {{ s.capacity }} left
+        {% if s.left > 0 %}
+            <form method="post" action="{% url 'book' s.id %}">
+                {% csrf_token %}
+                {% if event.kind == "ticket" %}Tickets{% else %}People{% endif %}:
+                <input type="number" name="quantity" value="1" min="1" max="{{ s.left }}">
+                <button>Book</button>
+            </form>
+        {% else %}
+            <b>Full</b>
+        {% endif %}
+    </div>
+{% empty %}
+    <p>No upcoming slots.</p>
+{% endfor %}
+{% endblock %}

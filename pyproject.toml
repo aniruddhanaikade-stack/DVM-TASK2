@@ -1,0 +1,9 @@
+[project]
+name = "dvm"
+version = "0.1.0"
+description = "Going out webapp"
+requires-python = ">=3.10"
+dependencies = [
+    "django>=5.0",
+    "psycopg[binary]>=3.1",
+]

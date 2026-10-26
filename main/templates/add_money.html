@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Add Money</h2>
+<p>Balance: <b>Rs {{ profile.balance }}</b></p>
+
+<!-- fake payment form, nothing is really charged -->
+<form method="post">
+    {% csrf_token %}
+    <p>Amount: <input type="number" name="amount" min="1"></p>
+    <p>Card number: <input type="text" name="card" placeholder="1234 5678 9012 3456"></p>
+    <p>Expiry: <input type="text" name="expiry" placeholder="MM/YY"> CVV: <input type="password" name="cvv" size="3"></p>
+    <button>Pay</button>
+</form>
+{% endblock %}

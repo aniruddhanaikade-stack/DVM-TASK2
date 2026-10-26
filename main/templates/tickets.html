@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+<h2>Active Tickets</h2>
+{% for b in bookings %}
+    <div class="box">
+        <h3>{{ b.slot.event.name }}</h3>
+        <p>{{ b.slot.event.place }}</p>
+        <p>When: {{ b.slot.start|date:"d M Y, h:i A" }} ({{ b.slot.duration }} min)</p>
+        <p>Quantity: {{ b.quantity }} | Ticket no: #{{ b.id }}</p>
+    </div>
+{% empty %}
+    <p>No active tickets.</p>
+{% endfor %}
+{% endblock %}
